@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apology</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8ffae, #43cea2);
+        }
+        h1 {
+            font-weight: 500;
+            color: #333;
+        }
+        #buttons {
+            margin-top: 20px;
+            display: inline-block;
+            position: relative;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+        #yes-btn {
+            background-color: #43cea2;
+            color: white;
+        }
+        #no-btn {
+            background-color: #ff4e50;
+            color: white;
+            position: absolute;
+            left: 50px;
+            transition: transform 0.2s ease;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Will you accept the sorry?</h1>
+        <div id="buttons">
+            <button id="yes-btn">YES</button>
+            <button id="no-btn">NO</button>
+        </div>
+    </div>
+
+    <script>
+        const yesButton = document.getElementById('yes-btn');
+        const noButton = document.getElementById('no-btn');
+
+        yesButton.addEventListener('click', () => {
+            window.location.href = "thankyou.html";
+        });
+
+        noButton.addEventListener('mouseover', () => {
+            // Move the NO button to random places when hovered over
+            const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+
+            // Check if YES and NO overlap
+            const yesRect = yesButton.getBoundingClientRect();
+            const noRect = noButton.getBoundingClientRect();
+
+            const overlap = !(yesRect.right < noRect.left || 
+                              yesRect.left > noRect.right || 
+                              yesRect.bottom < noRect.top || 
+                              yesRect.top > noRect.bottom);
+
+            if (overlap) {
+                window.location.href = "thankyou.html";
+            }
+        });
+    </script>
+</body>
+</html>
